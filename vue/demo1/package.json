@@ -60,7 +60,8 @@
     "vuex": "^4.0.0-0",
     "webpack-messages": "^2.0.4",
     "webpack-rtl-plugin": "^2.0.0",
-    "yup": "^0.32.8"
+    "yup": "^0.32.8",
+    "yup-locale-pt": "^0.0.9"
   },
   "devDependencies": {
     "@types/prismjs": "^1.16.2",

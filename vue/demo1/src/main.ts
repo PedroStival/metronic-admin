@@ -27,7 +27,6 @@ app.use(router);
 app.use(ElementPlus);
 
 ApiService.init(app);
-MockAdapter.init(app);
 initApexCharts(app);
 initInlineSvg(app);
 initVeeValidate();

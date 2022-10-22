@@ -1,7 +1,7 @@
 import { App } from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import JwtService from "@/core/services/JwtService";
+import JwtService from "@/core/services/JwtService.ts";
 import { AxiosResponse, AxiosRequestConfig } from "axios";
 
 /**
@@ -19,7 +19,17 @@ class ApiService {
   public static init(app: App<Element>) {
     ApiService.vueInstance = app;
     ApiService.vueInstance.use(VueAxios, axios);
-    ApiService.vueInstance.axios.defaults.baseURL = "http://localhost";
+    // ApiService.vueInstance.axios.defaults.baseURL =
+    //   "https://localhost:7187/api/";
+    ApiService.vueInstance.axios.defaults.baseURL =
+      "https://auers-auditoria.azurewebsites.net/api/";
+    ApiService.vueInstance.axios.defaults.headers.common["Accept"] =
+      "application/json";
+    ApiService.vueInstance.axios.defaults.headers.common["Content-Type"] =
+      "application/json";
+    ApiService.vueInstance.axios.defaults.headers.common[
+      "Access-Control-Allow-Origin"
+    ] = "*";
   }
 
   /**
@@ -28,7 +38,7 @@ class ApiService {
   public static setHeader(): void {
     ApiService.vueInstance.axios.defaults.headers.common[
       "Authorization"
-    ] = `Token ${JwtService.getToken()}`;
+    ] = `Bearer ${JwtService.getToken()}`;
   }
 
   /**
@@ -41,6 +51,7 @@ class ApiService {
     resource: string,
     params: AxiosRequestConfig
   ): Promise<AxiosResponse> {
+    this.setHeader();
     return ApiService.vueInstance.axios.get(resource, params).catch((error) => {
       throw new Error(`[KT] ApiService ${error}`);
     });
@@ -52,15 +63,11 @@ class ApiService {
    * @param slug: string
    * @returns Promise<AxiosResponse>
    */
-  public static get(
-    resource: string,
-    slug = "" as string
-  ): Promise<AxiosResponse> {
-    return ApiService.vueInstance.axios
-      .get(`${resource}/${slug}`)
-      .catch((error) => {
-        throw new Error(`[KT] ApiService ${error}`);
-      });
+  public static get(resource: string): Promise<AxiosResponse> {
+    this.setHeader();
+    return ApiService.vueInstance.axios.get(`${resource}`).catch((error) => {
+      throw new Error(`[KT] ApiService ${error}`);
+    });
   }
 
   /**
@@ -71,9 +78,11 @@ class ApiService {
    */
   public static post(
     resource: string,
-    params: AxiosRequestConfig
+    data: unknown,
+    params?: AxiosRequestConfig
   ): Promise<AxiosResponse> {
-    return ApiService.vueInstance.axios.post(`${resource}`, params);
+    this.setHeader();
+    return ApiService.vueInstance.axios.post(`${resource}`, data, params);
   }
 
   /**
@@ -88,6 +97,7 @@ class ApiService {
     slug: string,
     params: AxiosRequestConfig
   ): Promise<AxiosResponse> {
+    this.setHeader();
     return ApiService.vueInstance.axios.put(`${resource}/${slug}`, params);
   }
 
@@ -101,6 +111,7 @@ class ApiService {
     resource: string,
     params: AxiosRequestConfig
   ): Promise<AxiosResponse> {
+    this.setHeader();
     return ApiService.vueInstance.axios.put(`${resource}`, params);
   }
 
@@ -110,6 +121,7 @@ class ApiService {
    * @returns Promise<AxiosResponse>
    */
   public static delete(resource: string): Promise<AxiosResponse> {
+    this.setHeader();
     return ApiService.vueInstance.axios.delete(resource).catch((error) => {
       throw new Error(`[RWV] ApiService ${error}`);
     });

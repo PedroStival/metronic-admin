@@ -5,7 +5,7 @@
     <div
       :class="{
         'container-fluid': headerWidthFluid,
-        'container-xxl': !headerWidthFluid,
+        container: !headerWidthFluid,
       }"
       class="d-flex align-items-stretch justify-content-between"
     >
@@ -19,7 +19,7 @@
           id="kt_aside_mobile_toggle"
         >
           <span class="svg-icon svg-icon-2x mt-1">
-            <inline-svg src="media/icons/duotune/abstract/abs015.svg" />
+            <inline-svg src="media/icons/duotone/Text/Menu.svg" />
           </span>
         </div>
       </div>
@@ -27,8 +27,8 @@
 
       <!--begin::Mobile logo-->
       <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-        <a href="#" class="d-lg-none">
-          <img alt="Logo" src="media/logos/logo-2.svg" class="h-30px" />
+        <a href="#">
+          <img alt="Logo" src="media/logos/logo.png" class="h-20px" />
         </a>
       </div>
       <!--end::Mobile logo-->
@@ -42,10 +42,18 @@
           flex-lg-grow-1
         "
       >
-        <!--begin::Navbar-->
-        <div class="d-flex align-items-stretch" id="kt_header_menu_nav">
-          <KTMenu></KTMenu>
+        <div
+          class="h-100 d-flex justify-content-center align-items-center mx-5"
+        >
+          <a
+            href="https://forms.gle/WTZX9B2hUPhCQauM7"
+            target="_blank"
+            class="link-info fw-bolder"
+            >Envie seu feedback!</a
+          >
         </div>
+        <!--begin::Navbar-->
+
         <!--end::Navbar-->
 
         <!--begin::Topbar-->
@@ -61,16 +69,16 @@
   <!--end::Header-->
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
 import KTTopbar from "@/layout/header/Topbar.vue";
-import KTMenu from "@/layout/header/Menu.vue";
+import { version } from "@/core/helpers/documentation";
 
 import {
   headerWidthFluid,
   headerLeft,
   asideDisplay,
-} from "@/core/helpers/config";
+} from "@/core/helpers/config.ts";
 
 export default defineComponent({
   name: "KTHeader",
@@ -79,13 +87,13 @@ export default defineComponent({
   },
   components: {
     KTTopbar,
-    KTMenu,
   },
   setup() {
     return {
       headerWidthFluid,
       headerLeft,
       asideDisplay,
+      version,
     };
   },
 });

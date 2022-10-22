@@ -2,23 +2,23 @@ import LayoutConfigTypes from "@/core/config/LayoutConfigTypes";
 
 const config: LayoutConfigTypes = {
   themeName: "Metronic",
-  themeVersion: "8.0.25",
+  themeVersion: "8.0.15",
   demo: "demo1",
   main: {
     type: "default",
-    primaryColor: "#009EF7",
+    primaryColor: "#EF1E24",
     logo: {
-      dark: "media/logos/logo-1-dark.svg",
-      light: "media/logos/logo-1.svg",
-    },
+      dark: "media/logos/logo-1.svg",
+      light: "media/logos/Logo.png"
+    }
   },
   loader: {
-    logo: "media/logos/logo-1-dark.svg",
+    logo: "media/logos/logo.png",
     display: true,
-    type: "default",
+    type: "spinner-logo"
   },
   scrollTop: {
-    display: true,
+    display: true
   },
   header: {
     display: true,
@@ -26,32 +26,32 @@ const config: LayoutConfigTypes = {
     width: "fluid",
     fixed: {
       desktop: true,
-      tabletAndMobile: true,
-    },
+      tabletAndMobile: true
+    }
   },
   toolbar: {
-    display: true,
+    display: false,
     width: "fluid",
     fixed: {
       desktop: true,
-      tabletAndMobile: true,
-    },
+      tabletAndMobile: true
+    }
   },
   aside: {
-    display: true,
+    display: false,
     theme: "dark",
     fixed: true,
     menuIcon: "svg",
     minimized: false,
     minimize: true,
-    hoverable: true,
+    hoverable: true
   },
   content: {
-    width: "fixed",
+    width: "fixed"
   },
   footer: {
-    width: "fluid",
-  },
+    width: "fluid"
+  }
 };
 
 export default config;
